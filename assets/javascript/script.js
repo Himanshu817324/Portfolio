@@ -15,8 +15,8 @@ function filterProjects(category) {
 }
 
 function toggleService(event) {
-  event.preventDefault(); // Prevent default anchor behavior
-  const card = event.target.closest(".service-card"); // Find the parent card
+  event.preventDefault();
+  const card = event.target.closest(".service-card");
   const content = card.querySelector(".serviceMore");
 
   if (content.style.display === "none" || content.style.display === "") {
@@ -29,7 +29,6 @@ function toggleService(event) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize toggles for experience section
   const toggleBtns = document.querySelectorAll(".toggle-btn");
   toggleBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -44,24 +43,118 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Initialize WOW.js
   if (typeof WOW !== 'undefined') {
     new WOW().init();
   }
 
-  // Initialize AOS
   if (typeof AOS !== 'undefined') {
     AOS.init({
-      duration: 800,           // Animation duration in ms
-      easing: 'ease-in-out',   // Animation easing
-      once: false,             // Whether animation should happen only once
-      mirror: false,           // Whether elements should animate out while scrolling past them
-      offset: 120,             // Offset (in px) from the original trigger point
-      delay: 0,                // Default delay
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+      mirror: false,
+      offset: 120,
+      delay: 0,
     });
   }
 
-  // Back to top functionality
+  try {
+    if (!document.querySelector('.cb-cursor')) {
+      const cursorElement = document.createElement('div');
+      cursorElement.className = 'cb-cursor';
+      document.body.appendChild(cursorElement);
+
+      const cursorTextElement = document.createElement('div');
+      cursorTextElement.className = 'cb-cursor-text';
+      cursorElement.appendChild(cursorTextElement);
+
+      console.log('Cursor elements created');
+    }
+
+    const cursor = document.querySelector('.cb-cursor');
+    const cursorText = document.querySelector('.cb-cursor-text');
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+
+    document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      cursor.classList.add('-visible');
+    });
+
+    document.addEventListener('mouseleave', function () {
+      cursor.classList.remove('-visible');
+    });
+
+    document.addEventListener('mouseenter', function () {
+      cursor.classList.add('-visible');
+    });
+
+    document.addEventListener('mousedown', function () {
+      cursor.classList.add('-active');
+    });
+
+    document.addEventListener('mouseup', function () {
+      cursor.classList.remove('-active');
+    });
+
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.hasAttribute('data-cursor')) {
+        cursor.classList.add(e.target.getAttribute('data-cursor'));
+      }
+
+      if (e.target.tagName === 'A' ||
+        e.target.tagName === 'BUTTON' ||
+        e.target.tagName === 'INPUT' ||
+        e.target.tagName === 'TEXTAREA') {
+        cursor.classList.add('-pointer');
+      }
+
+      if (e.target.hasAttribute('data-cursor-text')) {
+        cursorText.textContent = e.target.getAttribute('data-cursor-text');
+        cursor.classList.add('-text');
+      }
+    });
+
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.hasAttribute('data-cursor')) {
+        cursor.classList.remove(e.target.getAttribute('data-cursor'));
+      }
+
+      if (e.target.tagName === 'A' ||
+        e.target.tagName === 'BUTTON' ||
+        e.target.tagName === 'INPUT' ||
+        e.target.tagName === 'TEXTAREA') {
+        cursor.classList.remove('-pointer');
+      }
+
+      if (e.target.hasAttribute('data-cursor-text')) {
+        cursor.classList.remove('-text');
+        cursorText.textContent = '';
+      }
+    });
+
+    function animateCursor() {
+      const ease = 0.2;
+      cursorX += (mouseX - cursorX) * ease;
+      cursorY += (mouseY - cursorY) * ease;
+
+      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+
+      requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+
+    console.log('Custom cursor initialized');
+  } catch (error) {
+    console.warn('Custom cursor initialization failed:', error);
+  }
+
   const backToTopButton = document.querySelector('.back-to-top');
   if (backToTopButton) {
     window.addEventListener('scroll', function () {
@@ -80,7 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Contact form handling
   const contactForm = document.querySelector(".contact-form");
   if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
@@ -92,36 +184,29 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function openTab(tabName) {
-  // Remove active class from all tab links
   let tabLinks = document.querySelectorAll(".tabLinks");
   tabLinks.forEach(link => link.classList.remove("activeLink"));
 
-  // Remove active class from all tab contents
   let tabContents = document.querySelectorAll(".tabContents");
   tabContents.forEach(content => content.classList.remove("activeTab"));
 
-  // Add active class to the clicked tab link
   event.currentTarget.classList.add("activeLink");
 
-  // Show the corresponding tab content
   document.getElementById(tabName).classList.add("activeTab");
 }
 
-// Fix navigation links smooth scrolling
 document.addEventListener('DOMContentLoaded', function () {
-  // Add smooth scrolling to all links
   const navLinks = document.querySelectorAll("a[href^='#']");
 
   navLinks.forEach(link => {
     link.addEventListener('click', function (e) {
-      // Get the target element
       const targetId = this.getAttribute('href').substring(1);
       if (targetId) {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
           e.preventDefault();
           window.scrollTo({
-            top: targetElement.offsetTop - 70, // Adjust for navbar height
+            top: targetElement.offsetTop - 70,
             behavior: 'smooth'
           });
         }

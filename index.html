@@ -44,8 +44,114 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
      <!-- Main Custom Css -->
      <link href="assets/stylesheet/style.css" rel="stylesheet" media="screen" />
+     <style>
+       .hero {
+         --cursor-color: rgba(255, 107, 107, 0.5);
+       }
+       #about {
+         --cursor-color: rgba(78, 205, 196, 0.5);
+       }
+       #experience {
+         --cursor-color: rgba(255, 209, 102, 0.5);
+       }
+       #projects {
+         --cursor-color: rgba(6, 214, 160, 0.5);
+       }
+       #services {
+         --cursor-color: rgba(17, 138, 178, 0.5);
+       }
+       #testimonials {
+         --cursor-color: rgba(239, 71, 111, 0.5);
+       }
+       #contact {
+         --cursor-color: rgba(106, 5, 114, 0.5);
+       }
+       
+       .cursor-activated {
+         cursor: none !important;
+       }
+       
+       .cursor-activated a,
+       .cursor-activated button,
+       .cursor-activated input,
+       .cursor-activated textarea,
+       .cursor-activated [data-cursor],
+       .cursor-activated [data-cursor-text] {
+         cursor: none !important;
+       }
+       
+       .cb-cursor {
+         position: fixed;
+         top: 0;
+         left: 0;
+         z-index: 9999;
+         pointer-events: none;
+         will-change: transform;
+         opacity: 0;
+         transition: opacity 0.3s;
+       }
+       
+       .cb-cursor:before {
+         content: "";
+         position: absolute;
+         top: -10px;
+         left: -10px;
+         display: block;
+         width: 20px;
+         height: 20px;
+         background-color: var(--cursor-color, rgba(255, 255, 255, 0.8));
+         border-radius: 50%;
+         transition: transform 0.3s, background-color 0.3s;
+         transform: scale(1);
+       }
+       
+       .cb-cursor.-visible {
+         opacity: 1;
+       }
+       
+       .cb-cursor.-pointer:before {
+         transform: scale(0.5);
+       }
+       
+       .cb-cursor.-text:before {
+         transform: scale(4);
+         background-color: rgba(0, 0, 0, 0.5);
+       }
+       
+       .cb-cursor-text {
+         position: absolute;
+         top: -10px;
+         left: -10px;
+         width: 60px;
+         height: 60px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: white;
+         font-size: 12px;
+         font-weight: 500;
+         opacity: 0;
+         transform: scale(0);
+         transition: opacity 0.3s, transform 0.3s;
+       }
+       
+       .cb-cursor.-text .cb-cursor-text {
+         opacity: 1;
+         transform: scale(1);
+       }
+       
+       .cb-cursor.-active:before {
+         transform: scale(1.5);
+       }
+       
+       @media (max-width: 768px) {
+         .cb-cursor {
+           display: none;
+         }
+       }
+     </style>
   </head>
-  <body>
+  <body class="cursor-activated">
     <!-- ==================== Top Navbar Area Start ===================== -->
     <header class="main-header mainNav" >
       <div class="header-sticky">
@@ -90,11 +196,11 @@
 
             <!-- Header Btn Start -->
             <div class="header-btn right">
-              <button type="button" class="btn button2">
-                <a href="#Contact">Let's Connect</a>
+              <button type="button" class="btn button2" data-cursor="-pointer" data-cursor-text="Connect">
+                <a href="#contact">Let's Connect</a>
               </button>
-              <button type="button" class="btn button1">
-                <a href="#">Download CV</a>
+              <button type="button" class="btn button1" data-cursor="-pointer" data-cursor-text="Download">
+                <a href="assets/images/HimanshuPandeyResume.pdf" download="HimanshuPandeyResume.pdf">Download CV</a>
               </button>
             </div>
             <!-- Header Btn End -->
@@ -135,23 +241,23 @@
 
         <div class="CTA g-lg-5 g-sm-4" data-aos="fade-up" data-aos-delay="700">
           <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <button type="button" class="btn button1">
-              <a href="#Contact">Let's Connect</a>
+            <button type="button" class="btn button1" data-cursor="-pointer" data-cursor-text="Connect">
+              <a href="#contact">Let's Connect</a>
             </button>
-            <button type="button" class="btn button2">
-              <a href="#Projects">See My Work</a>
+            <button type="button" class="btn button2" data-cursor="-pointer" data-cursor-text="Projects">
+              <a href="#projects">See My Work</a>
             </button>
           </div>
         </div>
 
         <div class="social" data-aos="fade-up" data-aos-delay="900">
-          <a href="https://www.linkedin.com/in/himanshu-pandey-25a175281"
+          <a href="https://www.linkedin.com/in/himanshu-pandey-25a175281" data-cursor="-pointer"
             ><i class="fab fa-linkedin"></i
           ></a>
-          <a href="https://github.com/"
+          <a href="https://github.com/" data-cursor="-pointer"
             ><i class="fab fa-github"></i
           ></a>
-          <a href="mailto:himanshupandey9378@gmail.com"
+          <a href="mailto:himanshupandey9378@gmail.com" data-cursor="-pointer"
             ><i class="fas fa-envelope"></i
           ></a>
         </div>
@@ -173,10 +279,10 @@
                 class="profile-img"
               />
               <div class="social-icons">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-discord"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#" data-cursor="-pointer"><i class="fab fa-twitter"></i></a>
+                <a href="#" data-cursor="-pointer"><i class="fab fa-facebook"></i></a>
+                <a href="#" data-cursor="-pointer"><i class="fab fa-discord"></i></a>
+                <a href="#" data-cursor="-pointer"><i class="fab fa-youtube"></i></a>
               </div>
             </div>
           </div>
@@ -197,10 +303,10 @@
           </div>
         </div>
         <div class="tabTitles" data-aos="fade-up" data-aos-delay="100">
-          <p class="tabLinks activeLink" onclick="openTab('Skills')">
+          <p class="tabLinks activeLink" onclick="openTab('Skills')" data-cursor="-pointer">
             Skills
           </p>
-          <p class="tabLinks" onclick="openTab('Education')">Education</p>
+          <p class="tabLinks" onclick="openTab('Education')" data-cursor="-pointer">Education</p>
         </div>
         <div class="tabContents activeTab" id="Skills">
           <div class="timelineItems">
@@ -314,7 +420,7 @@
                 <li><strong>Continuous Learning:</strong> Completed 5+ courses to stay updated on emerging trends.</li>
               </ul>
     
-              <button class="toggle-btn">Learn More</button>
+              <button class="toggle-btn" data-cursor="-pointer">Learn More</button>
             </div>
           </div>
     
@@ -331,89 +437,95 @@
       <div class="container">
         <h1 class="title" data-aos="fade-down" data-aos-delay="100">MY PROJECTS</h1>
         <div class="filter-buttons text-center my-4" data-aos="fade-up" data-aos-delay="200">
-            <button onclick="filterProjects('all')">All</button>
-            <button onclick="filterProjects('personal')">Personal</button>
-            <button onclick="filterProjects('techfest')">Tech Fest</button>
-            <button onclick="filterProjects('internship')">Internship</button>
+            <button onclick="filterProjects('all')" data-cursor="-pointer">All</button>
+            <button onclick="filterProjects('personal')" data-cursor="-pointer">Personal</button>
+            <button onclick="filterProjects('techfest')" data-cursor="-pointer">Tech Fest</button>
+            <button onclick="filterProjects('internship')" data-cursor="-pointer">Internship</button>
         </div>
         <div class="projects-grid" id="projectsGrid">
           <!-- Personal Projects -->
-          <div class="project-card personal" data-aos="flip-left" data-aos-delay="100">
+          <div class="project-card personal" data-aos="flip-left" data-aos-delay="100" data-cursor-text="View">
             <span class="badge">Personal</span>
             <h3>Portfolio Website</h3>
             <p>A sleek and interactive portfolio website to showcase my skills and resume.</p>
             <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
-              <a href="#"><i class="fas fa-external-link-alt"></i> Portfolio</a>
+              <a href="https://github.com/Himanshu817324/Portfolio" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/Portfolio/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
         
-          <div class="project-card personal" data-aos="flip-left" data-aos-delay="200">
+          <div class="project-card personal" data-aos="flip-left" data-aos-delay="200" data-cursor-text="View">
             <span class="badge">Personal</span>
             <h3>Flipkart Frontpage Clone</h3>
             <p>A responsive UI clone of Flipkart's homepage.</p>
             <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://github.com/Himanshu817324/flipkart" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/flipkart/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
         
-          <div class="project-card personal" data-aos="flip-left" data-aos-delay="300">
+          <div class="project-card personal" data-aos="flip-left" data-aos-delay="300" data-cursor-text="View">
             <span class="badge">Personal</span>
             <h3>Employee System (CRM)</h3>
             <p>A full CRM to manage employees, tasks, and role-based permissions.</p>
             <p><strong>Tech Stack:</strong> React.js, Tailwind CSS, MUI</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://github.com/Himanshu817324/Employee-System" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/Employee-System/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
 
-          <div class="project-card personal" data-aos="flip-left" data-aos-delay="400">
+          <div class="project-card personal" data-aos="flip-left" data-aos-delay="400" data-cursor-text="View">
             <span class="badge">Personal</span>
             <h3>InterviewPrepAI</h3>
             <p> An AI-powered app to prepare for interviews by generating questions and evaluating answers.</p>
             <p><strong>Tech Stack:</strong>  Vite, React, Node.js, Express, MongoDB, Tailwind CSS, TypeScript</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://github.com/Himanshu817324/InterviewPrepAI" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/InterviewPrepAI/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
 
-          <div class="project-card personal" data-aos="flip-left" data-aos-delay="500">
+          <div class="project-card personal" data-aos="flip-left" data-aos-delay="500" data-cursor-text="View">
             <span class="badge">Personal</span>
             <h3>FitNexus</h3>
             <p>A service + eCommerce site o ering gym plans and products with cart, wishlist, and 
               payment support.</p>
             <p><strong>Tech Stack:</strong>   Vite, React.js, Node.js, Tailwind CSS, Three.js, MUI, Framer Motion</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://github.com/Himanshu817324/FitNexus" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/FitNexus/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
 
-          <div class="project-card personal" data-aos="flip-left" data-aos-delay="600">
+          <div class="project-card personal" data-aos="flip-left" data-aos-delay="600" data-cursor-text="View">
             <span class="badge">Personal</span>
             <h3>DevMatch</h3>
             <p>A platform for developers to collaborate and connect based on shared interests and project 
               ideas.</p>
             <p><strong>Tech Stack:</strong> React.js, Tailwind CSS, MUI</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://github.com/Himanshu817324/DevMatch" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/DevMatch/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
         
           <!-- Tech Fest -->
-          <div class="project-card techfest" data-aos="flip-left" data-aos-delay="700">
+          <div class="project-card techfest" data-aos="flip-left" data-aos-delay="700" data-cursor-text="View">
             <span class="badge badge-green">Tech Fest</span>
             <h3>EcoSavvy</h3>
             <p>A platform promoting sustainable living with tips, tools, and resources.</p>
             <p><strong>Tech Stack:</strong> Vite, React.js, Node.js</p>
             <div class="project-links">
-              <a href="#"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://github.com/Himanshu817324/EcoSavvy" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://himanshupandey817324.github.io/EcoSavvy/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio</a>
             </div>
           </div>
         
           <!-- Internship Projects -->
-          <div class="project-card internship" data-aos="flip-left" data-aos-delay="800">
+          <div class="project-card internship" data-aos="flip-left" data-aos-delay="800" data-cursor-text="View">
             <span class="badge badge-blue">Internship</span>
             <h3>FlyafeLucknow</h3>
             <p>A professional airline charter and booking website with responsive UI.</p>
@@ -423,7 +535,7 @@
             </div>
           </div>
         
-          <div class="project-card internship" data-aos="flip-left" data-aos-delay="900">
+          <div class="project-card internship" data-aos="flip-left" data-aos-delay="900" data-cursor-text="View">
             <span class="badge badge-blue">Internship</span>
             <h3>DandeliHeavenResort</h3>
             <p>A dynamic hotel and resort booking website with clean, user-focused UI.</p>
@@ -433,7 +545,7 @@
             </div>
           </div>
 
-          <div class="project-card internship" data-aos="flip-left" data-aos-delay="1000">
+          <div class="project-card internship" data-aos="flip-left" data-aos-delay="1000" data-cursor-text="View">
             <span class="badge badge-blue">Internship</span>
             <h3>DesignsNDecor</h3>
             <p>An elegant interior design and home decor portfolio website with responsive gallery sections.</p>
@@ -443,7 +555,7 @@
             </div>
           </div>
 
-          <div class="project-card internship" data-aos="flip-left" data-aos-delay="1100">
+          <div class="project-card internship" data-aos="flip-left" data-aos-delay="1100" data-cursor-text="View">
             <span class="badge badge-blue">Internship</span>
             <h3>Suvisto - Shakes and Cafe</h3>
             <p>A cafe and shakes website with a vibrant UI and menu showcase.</p>
@@ -467,7 +579,7 @@
         <h2 class="title" data-aos="fade-down" data-aos-delay="100">Services</h2>
         <div class="service-container">
             
-            <div class="service-card" data-aos="fade-right" data-aos-delay="100">
+            <div class="service-card" data-aos="fade-right" data-aos-delay="100" data-cursor-text="Frontend">
               <i class="fas fa-code service-icon"></i>
               <h3 class="serviceTitle">Frontend Development</h3>
               <p class="serviceDescription">
@@ -481,10 +593,10 @@
                   <li>⚡ Responsive on all devices</li>
                 </ul>
               </div>
-              <a href="#" class="serviceLink" onclick="toggleService(event)">Learn More</a>
+              <a href="#" class="serviceLink" onclick="toggleService(event)" data-cursor="-pointer">Learn More</a>
             </div>
       
-            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200" data-cursor-text="Backend">
               <i class="fas fa-server service-icon"></i>
               <h3 class="serviceTitle">Backend Development</h3>
               <p class="serviceDescription">
@@ -497,10 +609,10 @@
                   <li>⚡ Scalable & cloud-ready</li>
                 </ul>
               </div>
-              <a href="#" class="serviceLink" onclick="toggleService(event)">Learn More</a>
+              <a href="#" class="serviceLink" onclick="toggleService(event)" data-cursor="-pointer">Learn More</a>
             </div>
       
-            <div class="service-card" data-aos="fade-left" data-aos-delay="300">
+            <div class="service-card" data-aos="fade-left" data-aos-delay="300" data-cursor-text="Full-Stack">
               <i class="fas fa-laptop-code service-icon"></i>
               <h3 class="serviceTitle">Full-Stack Development</h3>
               <p class="serviceDescription">
@@ -513,7 +625,7 @@
                   <li>⚡ Deployment on Vercel & AWS</li>
                 </ul>
               </div>
-              <a href="#" class="serviceLink" onclick="toggleService(event)">Learn More</a>
+              <a href="#" class="serviceLink" onclick="toggleService(event)" data-cursor="-pointer">Learn More</a>
             </div>
       
           </div>
@@ -596,7 +708,7 @@
               <div class="mb-3">
                 <textarea rows="5" class="form-control" placeholder="Your Message" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Send Message</button>
+              <button type="submit" class="btn btn-primary w-100" data-cursor="-pointer" data-cursor-text="Send">Send Message</button>
             </form>
           </div>
         </div>
